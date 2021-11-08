@@ -46,7 +46,7 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family;
-    searchForParents(person, people)
+    searchForSpouse(person, people)
     mainMenu(person, people)
     break;
     case "descendants":
@@ -285,6 +285,20 @@ function searchForDescendants(person,people){
   }
 }
 
+function searchForSpouse(person, people) {
+  let foundSpouse = people.filter(function(potentialMatch){
+    if ((potentialMatch.currentSpouse === person.id)) {
+      return true;
+    } else {
+      return false;
+    }
+  })
+  if(foundSpouse.length === 0) {
+    alert("No spouse found.")
+  } else {
+    alert ("Spouse listed below: \n" + foundSpouse[0].firstName + " " + foundSpouse[0].lastName)
+  }
+}
 //#endregion
 
 //Validation functions.
