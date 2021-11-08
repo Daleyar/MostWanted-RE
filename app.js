@@ -79,12 +79,11 @@ function searchByName(people){
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return foundPerson[0];
+  return mainMenu(foundPerson[0],people);
 }
 
 function searchByTrait(people){
   var traitChosen = people;
-  var foundPerson;
   if(traitChosen.length > 1){
     let traitsearch = parseInt(promptFor(`What trait would you like to search this person by?
     \nType "1" for Eye Color.
