@@ -130,9 +130,8 @@ function searchByTrait(people){
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people){
   let eyecolor = promptFor("What is the person's eyecolor?", customEyeColorValidation);
-  
   let foundPerson = people.filter(function(potentialMatch){
-    if (potentialMatch.eyeColor === eyecolor){
+    if (potentialMatch.eyeColor === eyecolor.toLowerCase()){
       return true;
     }
     else{
@@ -187,7 +186,7 @@ function searchByWeight(people){
 function searchByGender(people){
   let genderSearch = promptFor("What is the person's gender?", customGenderValidation);
   let genderFiltered = people.filter(function(potentialGenderMatch){
-    if (potentialGenderMatch.gender.toLowerCase() === genderSearch){
+    if (potentialGenderMatch.gender === genderSearch.toLowerCase()){
     return true;
   }
   else{
@@ -203,9 +202,9 @@ function searchByGender(people){
 }
 
 function searchByOccupation(people){
-  let OccupationSearch = promptFor("What is the person's eye color?", autoValid);
+  let OccupationSearch = promptFor("What is the person's occupation?", customOccupationValidation);
   let OccupationFiltered = people.filter(function(potentialOccupationMatch){
-    if (potentialOccupationMatch.Occupation.toLowerCase() === OccupationSearch){
+    if (potentialOccupationMatch.occupation === OccupationSearch.toLowerCase()){
     return true;
   }
   else{
@@ -363,7 +362,8 @@ function autoValid(input){
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
 function customEyeColorValidation(input){
-  if (input.toLowerCase() == "blue" || input.toLowerCase() == "brown" || input.toLowerCase() == "black"|| input.toLowerCase() == "hazel" || input.toLowerCase() == "green"){
+  if (input.toLowerCase() == "blue" || input.toLowerCase() == "brown" || input.toLowerCase() == "black"
+  || input.toLowerCase() == "hazel" || input.toLowerCase() == "green"){
     return true;
   }
   else{
@@ -391,6 +391,17 @@ function customHeightValidation(input){
 
 function customWeightValidation(input){
   if (input >= 100 && input < 300 ){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function customOccupationValidation(input){
+  if (input.toLowerCase() == "doctor" || input.toLowerCase() == "nurse" || input.toLowerCase() == "politician" 
+  || input.toLowerCase() == "assistant" || input.toLowerCase() == "landscaper" || input.toLowerCase() == "programmer" 
+  || input.toLowerCase() == "architect"){
     return true;
   }
   else{
