@@ -46,7 +46,7 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family;
-    searchForSpouse(person, people)
+    searchForSibling(person, people)
     mainMenu(person, people)
     break;
     case "descendants":
@@ -297,6 +297,29 @@ function searchForSpouse(person, people) {
     alert("No spouse found.")
   } else {
     alert ("Spouse listed below: \n" + foundSpouse[0].firstName + " " + foundSpouse[0].lastName)
+  }
+}
+
+function searchForSibling(person, people) {
+  let siblings = []
+  let foundSibling = people.filter(function (potentialMatch) {
+    if (person.parents.includes(potentialMatch.parents[0] || potentialMatch.parents[1])) {
+      return true;
+    }
+      return false;
+  })
+  for (let i = 0; i < foundSibling.length; i++) {
+    if(foundSibling.id === person.id) {
+      console.log("duplicate name");
+    }
+    else{
+      siblings.push(foundSibling[i].firstName + " " + foundSibling[i].lastName)
+    }
+  }
+  if(siblings.length === 0){
+    alert("No siblings found.")
+  }else{
+    alert(`Siblings listed below:\n${siblings}`)
   }
 }
 //#endregion
