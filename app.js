@@ -309,7 +309,7 @@ function searchForSibling(person, people) {
       return false;
   })
   for (let i = 0; i < foundSibling.length; i++) {
-    if(foundSibling.id === person.id) {
+    if(foundSibling[i].id === person.id) {
       console.log("duplicate name");
     }
     else{
