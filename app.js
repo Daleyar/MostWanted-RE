@@ -46,11 +46,13 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family;
-    searchForParents(people, person)
+    searchForParents(person, people)
     mainMenu(person, people)
     break;
     case "descendants":
     // TODO: get person's descendants
+    searchForDescendants(person,people)
+    mainMenu(person, people)
     break;
     case "restart":
     app(people); // restart
@@ -244,10 +246,10 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-function searchForParents(people, person) {
+function searchForParents(person, people) {
   let parents = []
   let foundParents = people.filter(function (potentialMatch) {
-    if (potentialMatch.id === person.parents[0] || potentialMatch.id === person.parents[1]) {
+    if (person.parents.includes(potentialMatch.id)) {
       return true;
     }
     else{
@@ -263,6 +265,26 @@ function searchForParents(people, person) {
     alert(`Parents listed below:\n${parents}`)
   }
 }
+
+function searchForDescendants(person,people){
+  let descendants = [];
+  let foundDescendants = people.filter(function(potentialMatch){
+    if(potentialMatch.parents.includes(person.id)){
+      return true;
+    }else{
+      return false;
+    }
+  })
+  for(let i = 0; i < foundDescendants.length; i++){
+    descendants.push(foundDescendants[i].firstName + " " + foundDescendants[i].lastName)
+  }
+  if(descendants.length === 0){
+    alert("No descendants found.")
+  }else{
+    alert(`Descendants listed below:\n${descendants}`)
+  }
+}
+
 //#endregion
 
 //Validation functions.
