@@ -102,10 +102,13 @@ function searchByTrait(people){
       break;
       case 3 :
       traitChosen = searchByWeight(traitChosen)
+      break;
       case 4 :
       traitChosen = searchByGender(traitChosen)
+      break;
       case 5 :
       traitChosen = searchByOccupation(traitChosen)
+      break;
       case 6 :
       traitChosen = searchByName(traitChosen)
       break;
@@ -114,7 +117,7 @@ function searchByTrait(people){
       break;
     }
   }else{
-    return traitChosen[0];
+    return mainMenu(traitChosen[0],people);
   }
 }
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
@@ -133,7 +136,7 @@ function searchByEyeColor(people){
   if(people.length > 1){
     searchByTrait(foundPerson);
   }else{
-    return foundPerson;
+    return mainMenu(foundPerson[0],people);
   }
 }
 
@@ -152,7 +155,7 @@ function searchByHeight(people){
   if(people.length > 1){
     searchByTrait(heightFiltered);
   }else{
-    return heightFiltered;
+    return mainMenu(heightFiltered[0],people);
   }
 }
 
@@ -168,7 +171,9 @@ function searchByWeight(people){
   })
   displayPeople(weightFiltered);
   if(people.length > 1){
-    searchByTrait(weightFiltered)
+    searchByTrait(weightFiltered);
+  }else{
+    mainMenu(weightFiltered[0],people);
   }
 }
 
@@ -185,6 +190,8 @@ function searchByGender(people){
   displayPeople(genderFiltered);
   if(people.length > 1){
     searchByTrait(genderFiltered)
+  }else{
+    mainMenu(genderFiltered[0],people);
   }
 }
 
@@ -201,6 +208,8 @@ function searchByOccupation(people){
   displayPeople(OccupationFiltered);
   if(people.length > 1){
     searchByTrait(OccupationFiltered)
+  }else{
+    mainMenu(OccupationFiltered[0],people);
   }
 }
 
