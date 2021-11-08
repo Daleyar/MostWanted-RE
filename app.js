@@ -129,7 +129,7 @@ function searchByTrait(people){
 }
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people){
-  let eyecolor = promptFor("What is the person's eyecolor?", customValidation);
+  let eyecolor = promptFor("What is the person's eyecolor?", customEyeColorValidation);
   
   let foundPerson = people.filter(function(potentialMatch){
     if (potentialMatch.eyeColor === eyecolor){
@@ -185,7 +185,7 @@ function searchByWeight(people){
 }
 
 function searchByGender(people){
-  let genderSearch = promptFor("What is the person's gender?",autoValid);
+  let genderSearch = promptFor("What is the person's gender?", customGenderValidation);
   let genderFiltered = people.filter(function(potentialGenderMatch){
     if (potentialGenderMatch.gender.toLowerCase() === genderSearch){
     return true;
@@ -362,8 +362,17 @@ function autoValid(input){
 
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
-function customValidation(input, people){
-  if (input.toLowerCase() == people.eyeColor || input.toLowerCase() == people.height || input.toLowerCase() == people.weight || input.toLowerCase() == people.gender || input.toLowerCase() == people.occupation){
+function customEyeColorValidation(input){
+  if (input.toLowerCase() == "blue" || input.toLowerCase() == "brown" || input.toLowerCase() == "black"|| input.toLowerCase() == "hazel" || input.toLowerCase() == "green"){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function customGenderValidation(input){
+  if (input.toLowerCase() == "male" || input.toLowerCase() == "female"){
     return true;
   }
   else{
