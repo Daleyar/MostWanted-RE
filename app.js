@@ -41,9 +41,13 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
+    displayPerson(person);
+    mainMenu(person, people);
     break;
     case "family":
-    // TODO: get person's family
+    // TODO: get person's family;
+    searchForParents(people, person)
+    mainMenu(person, people)
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -231,18 +235,35 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  personInfo += "Height: " + person.height + "\n";
-  personInfo += "Weight: " + person.weight + "\n";
-  personInfo += "Age: " + person.age + "\n";
+  personInfo += "Height: " + person.height + "in" + "\n";
+  personInfo += "Weight: " + person.weight + "lbs" + "\n";
+  personInfo += "DOB: " + person.dob + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
-  return mainMenu(person,people)
+}
+
+function searchForParents(people, person) {
+  let parents = []
+  let foundParents = people.filter(function (potentialMatch) {
+    if (potentialMatch.id === person.parents[0] || potentialMatch.id === person.parents[1]) {
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  for (let i = 0; i < foundParents.length; i++) {
+    parents.push(foundParents[i].firstName + " " + foundParents[i].lastName)
+  }
+  if(parents.length === 0){
+    alert("No parents found.")
+  }else{
+    alert(`Parents listed below:\n${parents}`)
+  }
 }
 //#endregion
-
-
 
 //Validation functions.
 //Functions to validate user input.
