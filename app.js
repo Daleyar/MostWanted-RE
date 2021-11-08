@@ -149,7 +149,7 @@ function searchByEyeColor(people){
 
 //TODO: add other trait filter functions here.
 function searchByHeight(people){
-  let heightSearch = parseInt(promptFor("What is the person's height(in)?", customValidation));
+  let heightSearch = parseInt(promptFor("What is the person's height(in)?", customHeightValidation));
   let heightFiltered = people.filter(function(potentialHeightMatch){
     if (potentialHeightMatch.height === heightSearch){
     return true;
@@ -167,7 +167,7 @@ function searchByHeight(people){
 }
 
 function searchByWeight(people){
-  let weightSearch = parseInt(promptFor("What is the person's weight(lbs)?",autoValid));
+  let weightSearch = parseInt(promptFor("What is the person's weight(lbs)?",customWeightValidation));
   let weightFiltered = people.filter(function(potentialWeightMatch){
     if (potentialWeightMatch.weight === parseInt(weightSearch)){
     return true;
@@ -203,7 +203,7 @@ function searchByGender(people){
 }
 
 function searchByOccupation(people){
-  let OccupationSearch = promptFor("What is the person's eye color?",autoValid);
+  let OccupationSearch = promptFor("What is the person's eye color?", autoValid);
   let OccupationFiltered = people.filter(function(potentialOccupationMatch){
     if (potentialOccupationMatch.Occupation.toLowerCase() === OccupationSearch){
     return true;
@@ -373,6 +373,24 @@ function customEyeColorValidation(input){
 
 function customGenderValidation(input){
   if (input.toLowerCase() == "male" || input.toLowerCase() == "female"){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function customHeightValidation(input){
+  if (input < 80 && input > 50 ){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function customWeightValidation(input){
+  if (input >= 100 && input < 300 ){
     return true;
   }
   else{
