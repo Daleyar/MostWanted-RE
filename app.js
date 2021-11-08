@@ -46,6 +46,8 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family;
+    searchForParents(person, people)
+    searchForSpouse(person, people)
     searchForSibling(person, people)
     mainMenu(person, people)
     break;
@@ -246,6 +248,25 @@ function displayPerson(person){
   alert(personInfo);
 }
 
+function searchForDescendants(person,people){
+  let descendants = [];
+  let foundDescendants = people.filter(function(potentialMatch){
+    if(potentialMatch.parents.includes(person.id)){
+      return true;
+    }else{
+      return false;
+    }
+  })
+  for(let i = 0; i < foundDescendants.length; i++){
+    descendants.push(foundDescendants[i].firstName + " " + foundDescendants[i].lastName)
+  }
+  if(descendants.length === 0){
+    alert("No descendants found.")
+  }else{
+    alert(`Descendants listed below:\n${descendants}`)
+  }
+}
+
 function searchForParents(person, people) {
   let parents = []
   let foundParents = people.filter(function (potentialMatch) {
@@ -263,25 +284,6 @@ function searchForParents(person, people) {
     alert("No parents found.")
   }else{
     alert(`Parents listed below:\n${parents}`)
-  }
-}
-
-function searchForDescendants(person,people){
-  let descendants = [];
-  let foundDescendants = people.filter(function(potentialMatch){
-    if(potentialMatch.parents.includes(person.id)){
-      return true;
-    }else{
-      return false;
-    }
-  })
-  for(let i = 0; i < foundDescendants.length; i++){
-    descendants.push(foundDescendants[i].firstName + " " + foundDescendants[i].lastName)
-  }
-  if(descendants.length === 0){
-    alert("No descendants found.")
-  }else{
-    alert(`Descendants listed below:\n${descendants}`)
   }
 }
 
@@ -360,20 +362,11 @@ function autoValid(input){
 
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
-function customValidation(input){
-  switch(input){
-    case people.eyeColor:
-      return true
-    case people.height:
-      return true
-    case people.weight:
-      return true
-    case people.gender:
-      return true
-    case people.occupation:
-      return true
-    default:
-    alert('Please enter a valid option'); 
+function customValidation(input, people){
+  if (input.toLowerCase() == people.eyeColor || input.toLowerCase() == people.height || input.toLowerCase() == people.weight || input.toLowerCase() == people.gender || input.toLowerCase() == people.occupation){
+    return true;
+  }
+  else{
     return false;
   }
 }
